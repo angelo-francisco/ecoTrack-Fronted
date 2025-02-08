@@ -134,8 +134,8 @@ function addMethods() {
     document.querySelectorAll('.edit-btn')
         .forEach(editBtn => {
             editBtn.addEventListener('click', async () => {
+                loader.style.display = "flex"
                 const id = editBtn.dataset.id
-
 
                 const response = await fetch(`${domain}/ecotrack/api/actions/get/${id}`, {
                     method: "GET",
@@ -146,8 +146,8 @@ function addMethods() {
                 })
 
                 const data = await response.json()
-                console.log(data)
                 if (response.ok) {
+                    loader.style.display = "none"
                     showModal2()
                     document.querySelector('#actionTitleEdit').value = data.title
                     document.querySelector('#actionDescriptionEdit').value = data.description
@@ -156,6 +156,7 @@ function addMethods() {
                     document.querySelector('#actionFormEdit')
                         .addEventListener('submit', async (e) => {
                             e.preventDefault()
+                            loader.style.display = "flex"
                             const response2 = await fetch(`${domain}/ecotrack/api/actions/update/${id}`, {
                                 method: "PUT",
                                 headers: {
@@ -192,7 +193,7 @@ function addMethods() {
                                 updateMessages()
                             }
                             closeModal2()
-
+                            loader.style.display = "none    "
                         })
                 } else {
                     closeModal2()
