@@ -81,18 +81,18 @@ function renderActions() {
                 actionsGrid.innerHTML = 'Sem acções sustentáveis adicionadas.';
                 loader.style.display = "none"
                 return;
-            }
-            if (data.detail == "Unauthorized") {
+            } else if (data.detail == "Unauthorized") {
                 alert("Sem permissão")
                 window.location.href = "/auth/login.html"
-            }
-            data.forEach(action => {
-                let actionHTML = createActionHtml(action.id, action.title, action.description, action.created_at,
-                    action.category, action.points)
-                actionsGrid.innerHTML += actionHTML
-            });
+            } else {
+                data.forEach(action => {
+                    let actionHTML = createActionHtml(action.id, action.title, action.description, action.created_at,
+                        action.category, action.points)
+                    actionsGrid.innerHTML += actionHTML
+                });
 
-            addMethods()
+                addMethods()
+            }
             loader.style.display = "none"
 
         })
@@ -319,26 +319,26 @@ document.querySelector('#js-action-form')
         updateUserPoints()
     })
 
-    document.querySelector('#logout-btn')
-        .addEventListener('click', async () => {
-            loader.style.display = "flex"
-            const response = await fetch(domain + '/ecotrack/api/auth/logout', {
-                method: "GET",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            
-            const data = await response.json()
-            
-            loader.style.display = "none"
-            if (response.ok) {
-                localStorage.removeItem('token')
-                window.location.href = '/auth/login.html'
-                localStorage.setItem('message', 'Logout feito com sucesso!')
-                success()
-                updateMessages()
+document.querySelector('#logout-btn')
+    .addEventListener('click', async () => {
+        loader.style.display = "flex"
+        const response = await fetch(domain + '/ecotrack/api/auth/logout', {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
             }
         })
+
+        const data = await response.json()
+
+        loader.style.display = "none"
+        if (response.ok) {
+            localStorage.removeItem('token')
+            window.location.href = '/auth/login.html'
+            localStorage.setItem('message', 'Logout feito com sucesso!')
+            success()
+            updateMessages()
+        }
+    })
