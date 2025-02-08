@@ -34,7 +34,7 @@ document.querySelector("#loginForm")
         const password = document.getElementById("password").value
 
         try {
-            const response = await fetch('https://core-58rc.onrender.com/ecotrack/api/auth/login', {
+            const response = await fetch('http://127.0.0.1:8000/ecotrack/api/auth/login', {
                 method: "POST",
                 credentials: "include",
                 headers: {

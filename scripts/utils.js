@@ -5,13 +5,14 @@ export function formateDate(datestring) {
 }
 
 export async function isUserLoggedIn() {
-    const response = await fetch("https://core-58rc.onrender.com/ecotrack/api/auth/check", {
+    const response = await fetch("http://127.0.0.1:8000/ecotrack/api/auth/check", {
         method: "GET",
         credentials: "include",
         headers: {
             'Content-Type': 'application/json'
         }
     })
+
     return response.status;
 }
 
@@ -30,7 +31,6 @@ export function redirectNotLoggedUser() {
         const status = await isUserLoggedIn();
 
         if (status === 400) {
-            console.log("User not logged in");
             window.location.href = '/auth/login.html';
         }
     });

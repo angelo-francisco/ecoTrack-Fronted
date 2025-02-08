@@ -65,7 +65,7 @@ function createActionHtml(id, title, description, created_at, category, points) 
 
 function renderActions() {
     loader.style.display = "flex"
-    fetch("https://core-58rc.onrender.com/ecotrack/api/actions/list", {
+    fetch("http://127.0.0.1:8000/ecotrack/api/actions/list", {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ function addMethods() {
             deleteBtn.addEventListener('click', async () => {
                 const id = deleteBtn.dataset.id
 
-                const response = await fetch(`https://core-58rc.onrender.com/ecotrack/api/actions/del/${id}`, {
+                const response = await fetch(`http://127.0.0.1:8000/ecotrack/api/actions/del/${id}`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
@@ -132,7 +132,7 @@ function addMethods() {
                 const id = editBtn.dataset.id
 
 
-                const response = await fetch(`https://core-58rc.onrender.com/ecotrack/api/actions/get/${id}`, {
+                const response = await fetch(`http://127.0.0.1:8000/ecotrack/api/actions/get/${id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -151,7 +151,7 @@ function addMethods() {
                     document.querySelector('#actionFormEdit')
                         .addEventListener('submit', async (e) => {
                             e.preventDefault()
-                            const response2 = await fetch(`https://core-58rc.onrender.com/ecotrack/api/actions/update/${id}`, {
+                            const response2 = await fetch(`http://127.0.0.1:8000/ecotrack/api/actions/update/${id}`, {
                                 method: "PUT",
                                 headers: {
                                     "Content-Type": "application/json",
@@ -224,7 +224,7 @@ function closeModal() {
 function updateUserPoints() {
     const pointsHTML = document.querySelector("#user-points")
 
-    fetch("https://core-58rc.onrender.com/ecotrack/api/actions/total-points", {
+    fetch("http://127.0.0.1:8000/ecotrack/api/actions/total-points", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -277,7 +277,7 @@ document.querySelector('#js-action-form')
         const description = document.querySelector('#actionDescription').value
         const category = document.querySelector('#actionCategory').value
 
-        const response = await fetch("https://core-58rc.onrender.com/ecotrack/api/actions/create", {
+        const response = await fetch("http://127.0.0.1:8000/ecotrack/api/actions/create", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
