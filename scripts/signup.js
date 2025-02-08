@@ -19,7 +19,7 @@ document.querySelector("#signupForm").addEventListener("submit", async (event) =
     const password = document.getElementById("password").value;
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/ecotrack/api/auth/register", {
+        const response = await fetch("https://core-58rc.onrender.com/ecotrack/api/auth/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

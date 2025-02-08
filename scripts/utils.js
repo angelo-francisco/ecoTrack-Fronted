@@ -5,7 +5,7 @@ export function formateDate(datestring) {
 }
 
 export async function isUserLoggedIn() {
-    const response = await fetch("http://127.0.0.1:8000/ecotrack/api/auth/check", {
+    const response = await fetch("https://core-58rc.onrender.com/ecotrack/api/auth/check", {
         method: "GET",
         credentials: "include",
         headers: {
