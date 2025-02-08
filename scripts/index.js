@@ -155,21 +155,23 @@ function addMethods() {
 
                     document.querySelector('#actionFormEdit')
                         .addEventListener('submit', async (e) => {
-                            e.preventDefault()
+                            let stringifiedData = {
+                                title: document.querySelector('#actionTitleEdit').value,
+                                description: document.querySelector('#actionDescriptionEdit').value,
+                                category: document.querySelector('#actionCategoryEdit').value,
+                                points: data.points
+                            }
+                            closeModal2()
+
                             loader.style.display = "flex"
+                            e.preventDefault()
                             const response2 = await fetch(`${domain}/ecotrack/api/actions/update/${id}`, {
                                 method: "PUT",
                                 headers: {
                                     "Content-Type": "application/json",
                                     'Authorization': `Bearer ${token}`
                                 },
-                                body: JSON.stringify({
-                                    title: document.querySelector('#actionTitleEdit').value,
-                                    description: document.querySelector('#actionDescriptionEdit').value,
-                                    category: document.querySelector('#actionCategoryEdit').value,
-                                    points: data.points
-                                })
-
+                                body: JSON.stringify(stringifiedData)
                             })
 
                             const data2 = await response2.json()
@@ -183,8 +185,9 @@ function addMethods() {
                                 const newActionElement = tempContainer.firstElementChild
 
                                 actionHTML.replaceWith(newActionElement)
+                                loader.style.display = "none"
                                 addMethods()
-                                localStorage.setItem("message", `${data.title} foi editado.`)
+                                localStorage.setItem("message", `<strong>${data.title}</strong> foi editado.`)
                                 success()
                                 updateMessages()
                             } else {
@@ -192,8 +195,7 @@ function addMethods() {
                                 error()
                                 updateMessages()
                             }
-                            closeModal2()
-                            loader.style.display = "none    "
+
                         })
                 } else {
                     closeModal2()
@@ -201,6 +203,7 @@ function addMethods() {
                     error()
                     updateMessages()
                 }
+                loader.style.display = "none"
             })
         })
 }
@@ -277,11 +280,14 @@ document.querySelector('#js-action-form')
             return
         }
 
-        const numeros = [10, 20, 30];
+        const numeros = [10, 20, 30]
         const points = numeros[Math.floor(Math.random() * numeros.length)]
         const title = document.querySelector('#actionTitle').value
         const description = document.querySelector('#actionDescription').value
         const category = document.querySelector('#actionCategory').value
+
+        closeModal()
+        loader.style.display = "flex"
 
         const response = await fetch(domain + "/ecotrack/api/actions/create", {
             method: "POST",
@@ -297,13 +303,42 @@ document.querySelector('#js-action-form')
             })
         })
 
+        loader.style.display = "none"
         const data = await response.json()
 
         if (response.ok) {
-            updateUserPoints()
             updateActions(createActionHtml(data.id, data.title, data.description,
                 data.created_at, data.category, data.points))
             addMethods()
+        } else {
+            localStorage.setItem("message", "Erro ao salvar o formulário")
+            error()
+            updateMessages()
+
         }
-        closeModal()
+        updateUserPoints()
     })
+
+    document.querySelector('#logout-btn')
+        .addEventListener('click', async () => {
+            loader.style.display = "flex"
+            const response = await fetch(domain + '/ecotrack/api/auth/logout', {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            
+            const data = await response.json()
+            
+            loader.style.display = "none"
+            if (response.ok) {
+                localStorage.removeItem('token')
+                window.location.href = '/auth/login.html'
+                localStorage.setItem('message', 'Logout feito com sucesso!')
+                success()
+                updateMessages()
+            }
+        })

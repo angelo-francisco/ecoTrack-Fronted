@@ -55,10 +55,13 @@
     <div class="eco-header">
         <div style="display: flex;gap: 20px;align-items: center;">
             <h1>🌱 Minhas Ações Sustentáveis</h1>
-            <span style="background-color: rgba(204, 202, 202, 0.581);padding: 6px;border-radius: 8px;">🪙&nbsp;<span id="user-points" style="color: #333;"></span></span>
+            <span style="background-color: rgba(204, 202, 202, 0.581);padding: 6px;border-radius: 8px;display: flex;align-items: center;justify-content: centerx;"><span>🪙</span><span id="user-points" style="color: #333;"></span></span>
         </div>
             
-        <button class="btn-primary" id="newActionBtn">+ Nova Ação</button>
+        <div style="display: flex;gap: 10px;align-items: center;">
+            <button class="btn-primary" id="newActionBtn">+ Nova Ação</button>
+            <button class="btn-primary" id="logout-btn" style="background-color: red;color: white;">Logout</button>
+        </div>
     </div>
     <div id="js-messages"
         style="padding: 20px;margin-bottom: 20px;border-radius: 8px;display: none;">
