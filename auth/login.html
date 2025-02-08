@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/login.css">
+    <title>EcoTrack - Login Sustentável</title>
+</head>
+
+<body>
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+    <div class="login-container">
+        <div class="login-form">
+            <div class="eco-logo">
+                <h1>🌎 EcoTrack</h1>
+            </div>
+            <p class="eco-motto">Monitorando um futuro sustentável</p>
+            <div id="js-messages"
+                style="padding: 20px;background-color: #D4EDDA;color: #51795a;margin-bottom: 20px;border-radius: 8px;display: none;">
+
+            </div>
+            <form id="loginForm" method="POST">
+                <div class="input-group">
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Palavra-passe" required>
+                </div>
+                <button type="submit" class="btn-login">Iniciar Sessão Sustentável</button>
+                <div class="eco-options">
+                    <a href="/auth/signup.html">Criar conta verde</a>
+                </div>
+            </form>
+            <p class="eco-footnote">Cada login contribui com 0.5g de CO² compensado</p>
+        </div>
+    </div>
+
+    <script src="../scripts/login.js" type="module"></script>
+</body>
+
+</html>

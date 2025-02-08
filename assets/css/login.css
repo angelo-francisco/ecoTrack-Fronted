@@ -1,0 +1,199 @@
+:root {
+    --eco-green-1: #3A5F49;
+    --eco-green-2: #4B8364;
+    --eco-green-3: #7BA982;
+    --eco-beige: #F4F1E6;
+    --eco-accent: #FFD700;
+    --eco-error: #E63946
+}
+
+body {
+    overflow: hidden;
+    font-family: Poppins, sans-serif;
+    background: linear-gradient(135deg, var(--eco-green-1), var(--eco-green-2));
+    height: 100vh;
+    margin: 0;
+    padding: 1rem;
+    display: grid;
+    place-items: center
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    perspective: 1000px
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(24, 41, 31, .2), inset 0 0 15px hsla(0, 0%, 100%, .3);
+    transform-style: preserve-3d;
+    overflow: hidden;
+}
+
+.eco-logo {
+    text-align: center;
+}
+
+.eco-logo h1 {
+    font-size: 2rem;
+    color: var(--eco-green-1);
+    margin: .5rem 0;
+    font-weight: 700;
+    letter-spacing: -.5px
+}
+
+.eco-motto {
+    text-align: center;
+    color: var(--eco-green-3);
+    font-size: .9rem;
+    margin-bottom: 2rem;
+    font-weight: 500
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.input-group input {
+    padding: 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: .75rem;
+    font-size: 1rem;
+    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+    background: #fff
+}
+
+.input-group input:focus {
+    outline: 0;
+    border-color: var(--eco-green-3);
+    box-shadow: 0 0 0 3px rgba(123, 169, 130, .3), inset 0 1px 3px rgba(0, 0, 0, .1)
+}
+
+.btn-login {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 1rem;
+    background: var(--eco-green-2);
+    color: #fff;
+    border: 0;
+    border-radius: .75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .2s ease, background .3s ease, box-shadow .3s ease;
+    position: relative;
+    overflow: hidden
+}
+
+.btn-login::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 25%, hsla(0, 0%, 100%, .2) 50%, transparent 75%);
+    animation: btnShine 3s infinite
+}
+
+@keyframes btnShine {
+    to {
+        left: 150%
+    }
+}
+
+.btn-login:hover {
+    background: var(--eco-green-1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(58, 95, 73, .3), inset 0 2px 4px hsla(0, 0%, 100%, .2)
+}
+
+.eco-options {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap
+}
+
+.eco-options a {
+    color: var(--eco-green-2);
+    font-size: .85rem;
+    position: relative;
+    padding: .25rem 0
+}
+
+.eco-options a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--eco-green-2);
+    transition: width .3s ease
+}
+
+.eco-options a:hover::after {
+    width: 100%
+}
+
+.eco-footnote {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: .75rem;
+    color: var(--eco-green-3);
+    opacity: .8
+}
+
+@media (max-width:480px) {
+    .login-form {
+        /* padding: 1.5rem; */
+        border-radius: 1rem
+    }
+
+    .btn-login {
+        padding: .875rem
+    }
+}
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #fff;
+    border-top: 5px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

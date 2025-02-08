@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack - Ações Sustentáveis</title>
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+
+<body>
+    <div id="loader" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="action-form-container eco-modal" id="actionFormEdit">
+        <form class="action-form modal-content" method="PUT">
+            <h2>Editar Acção</h2>
+            <input type="text" id="actionTitleEdit" placeholder="Título da Ação" required>
+            <textarea id="actionDescriptionEdit" placeholder="Descrição detalhada" rows="3" required></textarea>
+            <select id="actionCategoryEdit">
+                <option value="" selected disabled>Selecione a Categoria</option>
+                <option value="R">Reciclagem</option>
+                <option value="E">Economia de Energia</option>
+                <option value="A">Conservação de Água</option>
+                <option value="M">Mobilidade</option>
+            </select>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" id="cancelBtn2">Cancelar</button>
+                <button type="submit" class="btn-primary">Salvar Ação</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="action-form-container eco-modal" id="actionForm">
+        <form class="action-form modal-content" id="js-action-form"  method="POST">
+            <h2>Registrar Ação</h2>
+            <input type="text" id="actionTitle" placeholder="Título da Ação" required>
+            <textarea id="actionDescription" placeholder="Descrição detalhada" rows="3" required></textarea>
+            <select id="actionCategory">
+                <option value="" selected disabled>Selecione a Categoria</option>
+                <option value="R">Reciclagem</option>
+                <option value="E">Economia de Energia</option>
+                <option value="A">Conservação de Água</option>
+                <option value="M">Mobilidade</option>
+            </select>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" id="cancelBtn">Cancelar</button>
+                <button type="submit" class="btn-primary">Salvar Ação</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="eco-header">
+        <div style="display: flex;gap: 20px;align-items: center;">
+            <h1>🌱 Minhas Ações Sustentáveis</h1>
+            <span style="background-color: rgba(204, 202, 202, 0.581);padding: 6px;border-radius: 8px;">🪙&nbsp;<span id="user-points" style="color: #333;"></span></span>
+        </div>
+            
+        <button class="btn-primary" id="newActionBtn">+ Nova Ação</button>
+    </div>
+    <div id="js-messages"
+        style="padding: 20px;margin-bottom: 20px;border-radius: 8px;display: none;">
+
+    </div>
+    <div class="actions-grid" id="actionsGrid">
+
+    </div>
+
+    <div class="eco-modal" id="confirmationModal">
+        <div class="modal-content">
+            <p>Tem certeza que deseja excluir esta ação?</p>
+            <div class="modal-actions">
+                <button class="btn-secondary cancel-btn" id="cancelBtn">Cancelar</button>
+                <button class="btn-danger confirm-btn">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/index.js" type="module"></script>
+</body>
+
+</html>

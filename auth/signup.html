@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/login.css">
+    <title>EcoTrack - Cadastro Sustentável</title>
+</head>
+
+<body>
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="login-container">
+        <div class="login-form">
+            <div class="eco-logo">
+                <h1>🌎 EcoTrack</h1>
+            </div>
+            <p class="eco-motto">Junte-se à nossa comunidade verde</p>
+            <form id="signupForm" method="POST">
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder="Email">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Criar senha" minlength="8" required>
+                </div>
+                <button class="btn-login" id="js-btn-login">Criar Conta Verde</button>
+                <div class="eco-options">
+                    <a href="/auth/login.html">Já tem uma conta? Faça login</a>
+                </div>
+            </form>
+            <p class="eco-footnote">Seu cadastro planta 1 árvore virtual</p>
+        </div>
+    </div>
+
+    <script src="../scripts/signup.js" type="module"></script>
+</body>
+
+</html>
