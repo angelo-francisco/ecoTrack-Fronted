@@ -103,6 +103,7 @@ function addMethods() {
     document.querySelectorAll(".delete-btn")
         .forEach(deleteBtn => {
             deleteBtn.addEventListener('click', async () => {
+                loader.style.display = "flex"
                 const id = deleteBtn.dataset.id
 
                 const response = await fetch(`${domain}/ecotrack/api/actions/del/${id}`, {
@@ -126,6 +127,7 @@ function addMethods() {
                     error()
                     updateMessages()
                 }
+                loader.style.display = "none"
             })
         })
 
