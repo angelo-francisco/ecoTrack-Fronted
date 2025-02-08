@@ -15,7 +15,7 @@ export async function isUserLoggedIn() {
     return response.status;
 }
 
-export async function redirectLoggedUser() {
+export function redirectLoggedUser() {
     document.addEventListener('DOMContentLoaded', async () => {
         const status = await isUserLoggedIn();
 
@@ -25,7 +25,7 @@ export async function redirectLoggedUser() {
     });
 }
 
-export async function redirectNotLoggedUser() {
+export function redirectNotLoggedUser() {
     document.addEventListener('DOMContentLoaded', async () => {
         const status = await isUserLoggedIn();
 
