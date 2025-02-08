@@ -1,4 +1,4 @@
-import { redirectLoggedUser } from "./utils.js";
+import { redirectLoggedUser, domain } from "./utils.js";
 
 redirectLoggedUser()
 
@@ -19,7 +19,7 @@ document.querySelector("#signupForm").addEventListener("submit", async (event) =
     const password = document.getElementById("password").value;
 
     try {
-        const response = await fetch("https://core-58rc.onrender.com/ecotrack/api/auth/register", {
+        const response = await fetch(domain + "/ecotrack/api/auth/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

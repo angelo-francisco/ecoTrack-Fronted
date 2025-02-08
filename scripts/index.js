@@ -1,4 +1,4 @@
-import { redirectNotLoggedUser, formateDate } from './utils.js'
+import { redirectNotLoggedUser, formateDate, domain } from './utils.js'
 
 const token = localStorage.getItem('token')
 const loader = document.getElementById("loader");
@@ -65,7 +65,7 @@ function createActionHtml(id, title, description, created_at, category, points) 
 
 function renderActions() {
     loader.style.display = "flex"
-    fetch("https://core-58rc.onrender.com/ecotrack/api/actions/list", {
+    fetch(domain + "/ecotrack/api/actions/list", {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -82,16 +82,19 @@ function renderActions() {
                 loader.style.display = "none"
                 return;
             }
-
+            if (data.detail == "Unauthorized") {
+                alert("Sem permissão")
+                window.location.href = "/auth/login.html"
+            }
             data.forEach(action => {
                 let actionHTML = createActionHtml(action.id, action.title, action.description, action.created_at,
                     action.category, action.points)
                 actionsGrid.innerHTML += actionHTML
             });
 
+            addMethods()
             loader.style.display = "none"
 
-            addMethods()
         })
 
 }
@@ -102,7 +105,7 @@ function addMethods() {
             deleteBtn.addEventListener('click', async () => {
                 const id = deleteBtn.dataset.id
 
-                const response = await fetch(`https://core-58rc.onrender.com/ecotrack/api/actions/del/${id}`, {
+                const response = await fetch(`${domain}/ecotrack/api/actions/del/${id}`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
@@ -132,7 +135,7 @@ function addMethods() {
                 const id = editBtn.dataset.id
 
 
-                const response = await fetch(`https://core-58rc.onrender.com/ecotrack/api/actions/get/${id}`, {
+                const response = await fetch(`${domain}/ecotrack/api/actions/get/${id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -151,7 +154,7 @@ function addMethods() {
                     document.querySelector('#actionFormEdit')
                         .addEventListener('submit', async (e) => {
                             e.preventDefault()
-                            const response2 = await fetch(`https://core-58rc.onrender.com/ecotrack/api/actions/update/${id}`, {
+                            const response2 = await fetch(`${domain}/ecotrack/api/actions/update/${id}`, {
                                 method: "PUT",
                                 headers: {
                                     "Content-Type": "application/json",
@@ -224,19 +227,19 @@ function closeModal() {
 function updateUserPoints() {
     const pointsHTML = document.querySelector("#user-points")
 
-    fetch("https://core-58rc.onrender.com/ecotrack/api/actions/total-points", {
+    fetch(domain + "/ecotrack/api/actions/total-points", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
             'Authorization': `Bearer ${token}`
         }
     })
-    .then(response => response.json())
-    .then(data => {
-        const points = data.total_points
-        pointsHTML.innerText = points
-    })
-}   
+        .then(response => response.json())
+        .then(data => {
+            const points = data.total_points
+            pointsHTML.innerText = points
+        })
+}
 
 function showModal2() {
     document.getElementById("actionFormEdit").classList.add("show");
@@ -277,7 +280,7 @@ document.querySelector('#js-action-form')
         const description = document.querySelector('#actionDescription').value
         const category = document.querySelector('#actionCategory').value
 
-        const response = await fetch("https://core-58rc.onrender.com/ecotrack/api/actions/create", {
+        const response = await fetch(domain + "/ecotrack/api/actions/create", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

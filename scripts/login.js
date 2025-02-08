@@ -1,4 +1,4 @@
-import { redirectLoggedUser } from "./utils.js";
+import { domain, redirectLoggedUser } from "./utils.js";
 
 redirectLoggedUser()
 
@@ -34,7 +34,7 @@ document.querySelector("#loginForm")
         const password = document.getElementById("password").value
 
         try {
-            const response = await fetch('https://core-58rc.onrender.com/ecotrack/api/auth/login', {
+            const response = await fetch(domain+'/ecotrack/api/auth/login', {
                 method: "POST",
                 credentials: "include",
                 headers: {
